@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
-const { readFruitFile, promise } = require('../readFruits');
+const readFruitFile = require('../readFruits');
+
+describe('readData function', () => {
+  it('should read and display the data in fruits.txt in form of an array', () => { readFruitFile.readFruitFile('fruits.txt').then((data) => expect(data).toStrictEqual(['Apple', 'Orange', 'Banana', 'Strawberry'])); });
+});
+/*
 
 // test('readFruitFile Function', () => readFruitFile('fruits.txt').then((data) => {
 // expect(data).resolves.toStrictEqual(['Apple', 'Orange', 'Banana', 'Strawberry']);
@@ -16,7 +21,6 @@ describe('readFruits function', () => {
     }, 2000);
   });
 });
-/*
 
 test('readFruitFile Function', (done) => {
   promise.then((resolve) => {

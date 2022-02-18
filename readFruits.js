@@ -1,28 +1,12 @@
 const fs = require('fs');
 
-const readFruitFile = (filename) => {
-  let fruitsArray;
-  fs.readFile(filename, (err, data) => {
-    if (err) throw err;
-    const fruits = data.toString().split('\n');
-    fruitsArray = fruits;
-    console.log(fruits);
-    /*
-    fruits.forEach((fruit) => {
-      console.log(fruit);
-    }); */
+const readFruitFile = (fileName) => new Promise((fulfill, reject) => {
+  fs.readFile(fileName, (error, fruits) => {
+    if (error) {
+      return reject(new Error('File cannot be opened'));
+    }
+    console.log(fruits.toString().split('\r\n'));
+    return fulfill(fruits.toString().split('\r\n'));
   });
-  return new Promise((resolve) => {
-    resolve(fruitsArray);
-  });
-};
-const promise = new Promise((fulfill) => {
-  setTimeout(() => {
-    fulfill('FULFILLED!');
-  }, 300);
 });
-promise.then(() => {
-  readFruitFile('fruits.txt');
-});
-
-module.export = { promise, readFruitFile };
+module.export = readFruitFile;
